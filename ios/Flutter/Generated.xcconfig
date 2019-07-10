@@ -1,0 +1,10 @@
+// This is a generated file; do not edit or check into version control.
+FLUTTER_ROOT=/Users/wangshouli/Documents/flutter
+FLUTTER_APPLICATION_PATH=/Users/wangshouli/Documents/project/flutter-osc-master/flutter_app_xhq1
+FLUTTER_TARGET=/Users/wangshouli/Documents/project/flutter-osc-master/flutter_app_xhq1/lib/9_5_scollViewPageStore.dart
+FLUTTER_BUILD_DIR=build
+SYMROOT=${SOURCE_ROOT}/../build/ios
+FLUTTER_FRAMEWORK_DIR=/Users/wangshouli/Documents/flutter/bin/cache/artifacts/engine/ios
+FLUTTER_BUILD_NAME=1.0.0
+FLUTTER_BUILD_NUMBER=1
+TRACK_WIDGET_CREATION=true
