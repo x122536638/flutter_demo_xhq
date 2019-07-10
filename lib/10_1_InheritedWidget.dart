@@ -71,6 +71,7 @@ class ShareDataWidget extends InheritedWidget {
     //如果返回true，则子树中依赖(build函数中有调用)本widget
     //的子widget的`state.didChangeDependencies`会被调用
     return old.data != data;
+//  return false;
   }
 }
 
@@ -95,6 +96,7 @@ class __TestWidgetState extends State<_TestWidget> {
     super.didChangeDependencies();
     //父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
     //如果build中没有依赖InheritedWidget，则此回调不会被调用。
+    //
     print("Dependencies change");
   }
 }
@@ -106,13 +108,13 @@ class InheritedWidgetTestRoute extends StatefulWidget {
 }
 
 class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
-  int count = 0;
+  int county = 0;
 
   @override
   Widget build(BuildContext context) {
     return  Center(
       child: ShareDataWidget( //使用ShareDataWidget
-        data: count,
+        data: county,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -123,7 +125,7 @@ class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
             RaisedButton(
               child: Text("Increment"),
               //每点击一次，将count自增，然后重新build,ShareDataWidget的data将被更新
-              onPressed: () => setState(() => ++count),
+              onPressed: () => setState(() => ++county),
             )
           ],
         ),
