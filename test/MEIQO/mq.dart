@@ -10,9 +10,41 @@ void main() {
 }
 
 
- Locale localeQJ = Locale('zh', 'CN');
+// Locale localeQJ = Locale('zh', 'CN');
+class _AppSetting {
+  _AppSetting();
 
-class MyApp extends StatelessWidget {
+  Null Function(Locale locale) changeLocale;
+  Locale _locale;
+  List<Locale> supportedLocales = [Locale('zh', 'CH'), Locale('en', 'US')];
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  // 供外部使用的_AppSetting实例，用于修改app的状态
+  static _AppSetting setting = _AppSetting();
+
+  @override
+  void initState() {
+    super.initState();
+    setting.changeLocale = (Locale locale) {
+      if (setting.supportedLocales
+          .map((locale) {
+        return locale.languageCode;
+      })
+          .toSet()
+          .contains(locale?.languageCode)) {
+        setState(() {
+          setting._locale = locale;
+        });
+      }
+    };
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +61,7 @@ class MyApp extends StatelessWidget {
         //其它Locales
       ],
 //      locale: const Locale('en','US'),
-      locale:localeQJ,// const Locale('zh', 'CN'),
+      locale: const Locale('zh', 'CN'),
 
 //      title: DemoLocalizations.of(context).titleBarTitle,//'Welcome to Flutter',
       home: XHQSTFW(),
@@ -45,6 +77,12 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+//class MyApp extends StatelessWidget {
+//
+//
+//}
 
 class XHQSTFW extends StatefulWidget {
   @override
@@ -282,7 +320,9 @@ class _MqWelcomeState extends State<MqWelcome> {
 
 
                Navigator.of(context).pop();},child: Text('中文'),),
-             SimpleDialogOption(onPressed: (){Navigator.of(context).pop();},child: Text('English'),),
+             SimpleDialogOption(onPressed: (){
+               MyAppState.setting.changeLocale(Locale('en'));
+               Navigator.of(context).pop();},child: Text('English'),),
            ],
          );
        });
