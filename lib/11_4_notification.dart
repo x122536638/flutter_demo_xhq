@@ -30,11 +30,6 @@ class XHQSTFW extends StatefulWidget {
 }
 
 class _XHQSTFWState extends State<XHQSTFW> {
-  PointerEvent _event;
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return
@@ -44,24 +39,25 @@ class _XHQSTFWState extends State<XHQSTFW> {
         ),
         body: new Center(
           child:
+          //new Text('Hello World'),
+          NotificationListener(
+            onNotification: (notification){
+              //print(notification);
+              switch (notification.runtimeType){
+                case ScrollStartNotification: print("开始滚动"); break;
+                case ScrollUpdateNotification: print("正在滚动"); break;
+                case ScrollEndNotification: print("滚动停止"); break;
+                case OverscrollNotification: print("滚动到边界"); break;
+              }
+            },
+            child: ListView.builder(
 
-          Listener(
-            child: Container(
-              alignment: Alignment.center,
-              color: Colors.lightBlue,
-              width: 300.0,
-              height: 150.0,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(_event?.toString()??"",style: TextStyle(color: Colors.white)),
-              ),
+                itemCount: 100,
+                itemBuilder: (context, index) {
+                  return ListTile(title: Text("$index"),);
+                }
             ),
-//            onPointerDown: (PointerDownEvent event) => setState(()=>_event=event),
-            onPointerMove: (PointerMoveEvent event) => setState(()=>_event=event),
-//            onPointerUp: (PointerUpEvent event) => setState(()=>_event=event),
           ),
-
-//          new Text('Hello World'),
         ),
       );
   }
