@@ -3,11 +3,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'MQInternationalization.dart';
-
+//问题 没有修改第一个页面的语言
 void main() {
   debugPaintSizeEnabled = false;
   runApp(new MyApp());
 }
+
 
 // Locale localeQJ = Locale('zh', 'CN');
 
@@ -18,6 +19,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   // 供外部使用的_AppSetting实例，用于修改app的状态
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +35,12 @@ class MyAppState extends State<MyApp> {
         const Locale('zh', 'CN'), // 中文简体
         //其它Locales
       ],
-      locale: const Locale('en', 'US'),
+      locale: const Locale('en','US'),
 //      locale: const Locale('zh', 'CN'),
 
 //      title: DemoLocalizations.of(context).titleBarTitle,//'Welcome to Flutter',
-      home: XHQLocalizations(
-        child: XHQSTFW(),
-        key: globalKey,
-      ),
+      home: XHQLocalizations(child:  XHQSTFW(),key: globalKey,),
+
 
 //      XHQSTFW(),
 
@@ -55,6 +55,7 @@ class MyAppState extends State<MyApp> {
     );
   }
 }
+
 
 //class MyApp extends StatelessWidget {
 //
@@ -82,7 +83,7 @@ class _XHQSTFWState extends State<XHQSTFW> {
 
 //          new Text('Welcome to meiqo.'),
         ),
-        body: Center(
+        body:  Center(
           child: MqWelcome(),
         ),
       ),
@@ -90,40 +91,51 @@ class _XHQSTFWState extends State<XHQSTFW> {
   }
 }
 
+
 //国际化全局key
 
-GlobalKey<_XHQLocalizationsState> globalKey =
-    new GlobalKey<_XHQLocalizationsState>();
+GlobalKey<_XHQLocalizationsState> globalKey = new GlobalKey<_XHQLocalizationsState>();
 
 //国际化widget
 
+
 class XHQLocalizations extends StatefulWidget {
+
   final Widget child;
 
-  XHQLocalizations({Key key, this.child}) : super(key: key);
+
+  XHQLocalizations({Key key,this.child}):super(key : key);
 
   @override
   _XHQLocalizationsState createState() => _XHQLocalizationsState();
+
 }
 
 class _XHQLocalizationsState extends State<XHQLocalizations> {
-  Locale locale = Locale('zh', 'CH');
 
-  changeLocal(Locale l) {
+  Locale _locale = Locale('zh','CH');
+
+
+  changeLocal(Locale l){
     setState(() {
-      locale = l;
+
+      _locale =l;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Localizations.override(
       context: context,
       child: widget.child,
-      locale: locale,
+      locale: _locale,
+
     );
   }
 }
+
+
 
 class MqWelcome extends StatefulWidget {
   @override
@@ -132,7 +144,7 @@ class MqWelcome extends StatefulWidget {
 
 class _MqWelcomeState extends State<MqWelcome> {
   final myController = TextEditingController();
-  final myController2 = TextEditingController(text:globalKey.currentState.locale.languageCode );
+  final myController2 = TextEditingController();
 
   TextFormField textField0;
   TextFormField textField01; /*没用 用controller获取text*/
@@ -146,14 +158,6 @@ class _MqWelcomeState extends State<MqWelcome> {
 //      print(textField01.controller.text);
 
     print(myController.text);
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    tf0.controller.text = globalKey.currentState.locale.languageCode;
-
-    super.didChangeDependencies();
   }
 
   @override
@@ -175,7 +179,8 @@ class _MqWelcomeState extends State<MqWelcome> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('ddadadadsadadadaads'),
-              Text(DemoLocalizations.of(context).clickTop),
+              Text(
+                  DemoLocalizations.of(context).clickTop),
             ],
           ),
         ),
@@ -204,8 +209,6 @@ class _MqWelcomeState extends State<MqWelcome> {
       onPressed: () {
         print('按钮点击了');
 //        tf0.controller.text = 'ss';//问题 这个字符怎么动态改变
-//        tf0.controller.text = globalKey.currentState.locale.languageCode;
-
         showAlertDialog(context);
       },
       child: Row(
@@ -241,12 +244,9 @@ class _MqWelcomeState extends State<MqWelcome> {
     return textField0 = TextFormField(
       enabled: false,
       controller: myController2,
-      decoration: InputDecoration(
-          labelText: "选择语言",
-//          hintText: globalKey.currentState.locale.languageCode,
-
-          border: InputBorder.none //隐藏下划线
-          ),
+      decoration:
+          InputDecoration(labelText: "选择语言", border: InputBorder.none //隐藏下划线
+              ),
     );
   }
 //      TextFormField(
@@ -329,36 +329,32 @@ class _MqWelcomeState extends State<MqWelcome> {
   }
 
   void showAlertDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-            title: Text('选择语言'),
-            children: <Widget>[
-              SimpleDialogOption(
-                onPressed: () {
-                  Locale _locale = const Locale('zh', 'CH');
+       showDialog(context: context,builder: (BuildContext context){
+         return SimpleDialog(
+           title: Text('选择语言'),
+           children: <Widget>[
+             SimpleDialogOption(onPressed: (){
+               Locale _locale = const Locale('zh','CH');
 
-                  Locale localeOf = Localizations.localeOf(context);
-                  print(localeOf);
-                  //应该在这儿设置 语言为中文 ,但是 怎么设置呢
+               Locale localeOf = Localizations.localeOf(context);
+               print(localeOf);
+               //应该在这儿设置 语言为中文 ,但是 怎么设置呢
 //               freeLocalizationStateKey.currentState.changeLocale(const Locale('zh',"CH"));
 //               Localizations.localeOf(context) =  Locale('zh', 'CN');
 
-                  globalKey.currentState.changeLocal(Locale('zh'));
-                  Navigator.of(context).pop();
-                },
-                child: Text('中文'),
-              ),
-              SimpleDialogOption(
-                onPressed: () {
-                  globalKey.currentState.changeLocal(Locale('en'));
-                  Navigator.of(context).pop();
-                },
-                child: Text('English'),
-              ),
-            ],
-          );
-        });
+               globalKey.currentState.changeLocal(Locale('zh'));
+               Navigator.of(context).pop();
+               },child: Text('中文'),),
+             SimpleDialogOption(onPressed: (){
+
+
+               globalKey.currentState.changeLocal(Locale('en'));
+               Navigator.of(context).pop();},child: Text('English'),),
+           ],
+         );
+       });
   }
 }
+
+
+

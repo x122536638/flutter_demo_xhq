@@ -13,13 +13,13 @@ class DemoLocalizations {
     'en': {
       'task title': 'Flutter Demo',
       'titlebar title': 'welome to mq',
-      'click tip': 'You have pushed the button this many times:',
+      'click tip': 'You have pushed the button this many timesYou have pushed the button this many timesYou have pushed the button this many times:',
       'inc':'Increment'
     },
     'zh': {
       'task title': 'Flutter 示例',
       'titlebar title': '欢迎来到mq',
-      'click tip': '你一共点击了这么多次按钮：',
+      'click tip': '你一共点击了这么多次按钮你一共点击了这么多次按钮你一共点击了这么多次按钮你一共点击了这么多次按钮你一共点击了这么多次按钮：',
       'inc':'增加'
     }
 
