@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'MQInternationalization.dart';
+import 'MainPage.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
@@ -62,6 +63,9 @@ class MyAppState extends State<MyApp> {
 //}
 
 class XHQSTFW extends StatefulWidget {
+  //是否显示欢迎页
+
+
   @override
   _XHQSTFWState createState() => _XHQSTFWState();
 }
@@ -107,7 +111,7 @@ class XHQLocalizations extends StatefulWidget {
 }
 
 class _XHQLocalizationsState extends State<XHQLocalizations> {
-  Locale locale = Locale('zh', 'CH');
+  Locale locale = Locale('en');
 
   changeLocal(Locale l) {
     setState(() {
@@ -146,8 +150,11 @@ class _MqWelcomeState extends State<MqWelcome> {
 //      print(textField01.controller.text);
 
     print(myController.text);
-  }
 
+//    Navigator.removeRoute(context, route)
+    Navigator.pop(context, 'Nope!');
+    Navigator.push(context, new MaterialPageRoute(builder: (context) => new MainPage()));
+  }
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
