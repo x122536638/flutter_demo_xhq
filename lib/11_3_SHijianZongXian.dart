@@ -33,6 +33,7 @@ class _XHQSTFWState extends State<XHQSTFW> {
 
   EventBus bus = new EventBus();
 
+  String string = 'hello world';
 
   @override
   void initState() {
@@ -42,7 +43,14 @@ class _XHQSTFWState extends State<XHQSTFW> {
     bus.on("login", (arg) {
       // do something
 
-      print('login了');
+      print('login了   $arg   ${this}');
+      setState(() {
+
+        string = arg;
+      });
+
+
+
     });
   }
 
@@ -60,7 +68,7 @@ class _XHQSTFWState extends State<XHQSTFW> {
             
            Column(
              children: <Widget>[
-               Text('Hello World'),
+               Text(this.string),
 
              ],
            ),

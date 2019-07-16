@@ -5,6 +5,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'MQInternationalization.dart';
 import 'MainPage.dart';
 
+
+
+import 'EventBus.dart';
+
+
+var bus = new EventBus();
+
 void main() {
   debugPaintSizeEnabled = false;
   runApp(new MyApp());
@@ -20,8 +27,18 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   // 供外部使用的_AppSetting实例，用于修改app的状态
 
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
+
+
     return new MaterialApp(
       localizationsDelegates: [
         // 本地化的代理类
@@ -34,14 +51,28 @@ class MyAppState extends State<MyApp> {
         const Locale('zh', 'CN'), // 中文简体
         //其它Locales
       ],
-      locale: const Locale('en', 'US'),
+//      locale: const Locale('en', 'US'),
 //      locale: const Locale('zh', 'CN'),
 
 //      title: DemoLocalizations.of(context).titleBarTitle,//'Welcome to Flutter',
-      home: XHQLocalizations(
-        child: XHQSTFW(),
+      home: 
+          new Builder(builder: (context){
+            return  XHQLocalizations(
+//
+
+        child: XHQSTFW(),//页面转换是不是应该换这个child 而不应该用路由切换
         key: globalKey,
-      ),
+      );
+
+
+                }),
+      
+//      XHQLocalizations(
+//
+//
+//        child: XHQSTFW(),//页面转换是不是应该换这个child 而不应该用路由切换
+//        key: globalKey,
+//      ),
 
 //      XHQSTFW(),
 
@@ -71,6 +102,29 @@ class XHQSTFW extends StatefulWidget {
 }
 
 class _XHQSTFWState extends State<XHQSTFW> {
+
+  Widget toshowWidget;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    bus.on("login", (arg) {
+      // do something
+//      Navigator.push
+      setState(() {
+        toshowWidget = arg;
+
+      });
+    });
+
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -79,7 +133,7 @@ class _XHQSTFWState extends State<XHQSTFW> {
         primaryColor: Color(0xffFFD54F),
       ), //Colors.yellow[600] type 'Color' is not a subtype of type 'MaterialColor'
 //      iconTheme: IconThemeData(color: Colors.teal),
-      child: new Scaffold(
+      child:toshowWidget!=null ?toshowWidget:Scaffold(
         appBar: new AppBar(
           leading: Icon(Icons.star),
           title: Text(DemoLocalizations.of(context).titleBarTitle),
@@ -87,9 +141,19 @@ class _XHQSTFWState extends State<XHQSTFW> {
 //          new Text('Welcome to meiqo.'),
         ),
         body: Center(
-          child: MqWelcome(),
+          child:
+           MqWelcome(),
+//            new Builder(builder: (BuildContext context){
+//
+//              print('$context   11111');
+//
+////              return  MqWelcome();
+//            }),
+//          MqWelcome(),
         ),
       ),
+
+
     );
   }
 }
@@ -119,6 +183,9 @@ class _XHQLocalizationsState extends State<XHQLocalizations> {
     });
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Localizations.override(
@@ -143,17 +210,23 @@ class _MqWelcomeState extends State<MqWelcome> {
 
 //如果想拿到TF1的文本  ,ios 做法 是成员变量指向TF1 flutter 好像不好使 用sting类型属性记录住 TF1内容
 
+
+
+
   _start() {
+    print('$context   222222');
     //拿到textfrom?
 //    textField01.text;/* 鸭羹没有这个属性啊 */
 
 //      print(textField01.controller.text);
 
     print(myController.text);
+    bus.emit("login",MainPage());
 
 //    Navigator.removeRoute(context, route)
-    Navigator.pop(context, 'Nope!');
-    Navigator.push(context, new MaterialPageRoute(builder: (context) => new MainPage()));
+//    Navigator.pop(context, 'Nope!');
+//    Navigator.push(context, new MaterialPageRoute(builder: (context) => new MainPage()));
+//  Navigator.replace(context, oldRoute: this, newRoute: null)
   }
   @override
   void didChangeDependencies() {
@@ -256,20 +329,7 @@ class _MqWelcomeState extends State<MqWelcome> {
           ),
     );
   }
-//      TextFormField(
-//    controller: myController2,
-//    decoration: InputDecoration(
-//      labelText: "选择语言",
-////      hintText: "请输入zip",
-////            prefixIcon: Icon(Icons.email),
-//            border: InputBorder.none //隐藏下划线
-//    ),
-////    autovalidate: true,
-////    validator: (v) {
-////      return v.trim().length > 5 ? null : "不能为小于5";
-////    },
-//
-//  );
+
 
   @override
   Widget build(BuildContext context) {

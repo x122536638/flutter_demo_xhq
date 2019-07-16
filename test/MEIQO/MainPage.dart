@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'MainPageSub1.dart';
+import 'mq.dart';
+import 'MQInternationalization.dart';
 
 //class MainPage extends StatefulWidget {
 //  @override
@@ -56,44 +58,53 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _globalKey,
-      appBar: AppBar(
-        title: Text("app name"),
+    return buildCenter(context);
+  }
+
+  Center buildCenter(BuildContext context) {
+    return Center(
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Scaffold(
+          key: _globalKey,
+          appBar: AppBar(
+            title: Text(DemoLocalizations.of(context).titleBarTitle),
+//        Text("app name"),
 //        leading: Icon(Icons.add),//这么加的话 侧拉效果就没了
-        leading: Builder(builder: (BuildContext context) {
-          return IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              print('anniu 1');
+            leading: Builder(builder: (BuildContext context) {
+              return IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  print('anniu 1');
 //              Scaffold.of(context).openDrawer();//获取state的一种方法
 
-              _globalKey.currentState.openDrawer();
-            },
+                  _globalKey.currentState.openDrawer();
+                },
 
 //
-          );
-        }),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.share),
-          ),
-        ],
+              );
+            }),
+            actions: <Widget>[
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.share),
+              ),
+            ],
 //        bottom: TabBar(controller: _tabController, tabs: getTabList()),
-      ),
-      drawer: new MyDrawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.business), title: Text('Business')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.school), title: Text('School')),
-        ],
-        currentIndex: _currentPageViewIndex,
-        onTap:onTap,// _onItemTapped,
-      ),
+          ),
+          drawer: new MyDrawer(),
+          bottomNavigationBar: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.business), title: Text('Business')),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.school), title: Text('School')),
+            ],
+            currentIndex: _currentPageViewIndex,
+            onTap:onTap,// _onItemTapped,
+          ),
 //          BottomAppBar(
 //        color: Colors.white,
 //        shape: CircularNotchedRectangle(),
@@ -106,19 +117,19 @@ class _MainPageState extends State<MainPage>
 //          ],
 //        ),
 //      ),
-      body: new PageView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return
+          body: new PageView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return
 //            MainPageSub1();
-              pages[index];//这个报错啊
-            //Text(tabs[index]);
+                  pages[index];//这个报错啊
+                //Text(tabs[index]);
 //            index == 1 ? new Text("page1") : new Text('Page2');
-        },
-        onPageChanged: _pageChange,
-        controller: pageController,
-        itemCount: tabs.length,
+            },
+            onPageChanged: _pageChange,
+            controller: pageController,
+            itemCount: tabs.length,
 
-      ),
+          ),
 
 //      TabBarView(
 //        controller: _tabController,
@@ -132,11 +143,14 @@ class _MainPageState extends State<MainPage>
 //          );
 //        }).toList(),
 //      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            child: Icon(Icons.add),
+          ),
+        ),
       ),
-    );
+    ),
+  );
   }
 
   List getTabList() {
@@ -175,6 +189,8 @@ class _MainPageState extends State<MainPage>
   }
 }
 
+
+//侧拉
 class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -197,6 +213,7 @@ class MyDrawer extends StatelessWidget {
 //                        "imgs/avatar.png",
                         "images/11.png",
                         width: 80,
+                        height: 80,
                       ),
                     ),
                   ),
@@ -216,7 +233,10 @@ class MyDrawer extends StatelessWidget {
                   ),
                   ListTile(
                     leading: const Icon(Icons.settings),
-                    title: const Text('Manage accounts'),
+                    title: const Text('语言设置'),
+                    onTap:(){
+                      showAlertDialog(context);
+                    },
                   ),
                 ],
               ),
@@ -225,5 +245,40 @@ class MyDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+
+  void showAlertDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: Text('选择语言'),
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: () {
+                  Locale _locale = const Locale('zh', 'CH');
+
+                  Locale localeOf = Localizations.localeOf(context);
+                  print(localeOf);
+                  //应该在这儿设置 语言为中文 ,但是 怎么设置呢
+//               freeLocalizationStateKey.currentState.changeLocale(const Locale('zh',"CH"));
+//               Localizations.localeOf(context) =  Locale('zh', 'CN');
+
+                  globalKey.currentState.changeLocal(Locale('zh'));
+                  Navigator.of(context).pop();
+                },
+                child: Text('中文'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  globalKey.currentState.changeLocal(Locale('en'));
+                  Navigator.of(context).pop();
+                },
+                child: Text('English'),
+              ),
+            ],
+          );
+        });
   }
 }

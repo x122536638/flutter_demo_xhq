@@ -27,10 +27,14 @@ class MyApp extends StatelessWidget {
 
 
     return new MaterialApp(
-      
+      theme: ThemeData(primaryColor: Colors.red),
       title: 'Welcome to Flutter',
       home: //new Echo(text: 'ddddd',backgroundColor: Colors.red,),
-      new FirstPage(),
+      new Builder(builder: (BuildContext context){
+        return FirstPage();
+      }),
+
+//      FirstPage(),
 //        new Scaffold(
 //          body:        Column(
 //            children: <Widget>[
