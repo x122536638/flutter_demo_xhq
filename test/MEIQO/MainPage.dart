@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -60,10 +57,15 @@ class _MainPageState extends State<MainPage>
 
     //在合适的地方把 用户名存到 沙盒里
 //
-//    SharedPreferences prefs = await SharedPreferences.getInstance();
-//
-//    await prefs.setString('userName', '陈冠希');
 
+
+    xx();
+  }
+
+  xx()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('userName', '陈冠希');
   }
 
   @override
@@ -74,7 +76,7 @@ class _MainPageState extends State<MainPage>
   Center buildCenter(BuildContext context) {
     return Center(
     child: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(0.0),
       child: Center(
         child: Scaffold(
           key: _globalKey,
@@ -210,6 +212,29 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+
+
+  String name;
+
+  getname()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String strName = await prefs.get('userName');
+
+    setState(() {
+      name = strName;
+    });
+  }
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getname();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -235,8 +260,9 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                     ),
                   ),
-                  Text(
-                    "Wendux",
+                  Text(name !=null?name:'mingzi',
+//                    "Wendux",
+//                      getname(),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],
