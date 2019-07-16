@@ -8,6 +8,8 @@ import 'MainPageSub1.dart';
 import 'mq.dart';
 import 'MQInternationalization.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 //class MainPage extends StatefulWidget {
 //  @override
 //  _MainPageState createState() => _MainPageState();
@@ -54,6 +56,14 @@ class _MainPageState extends State<MainPage>
     // TODO: implement initState
     super.initState();
     _tabController = TabController(length: tabs.length, vsync: this);
+
+
+    //在合适的地方把 用户名存到 沙盒里
+//
+//    SharedPreferences prefs = await SharedPreferences.getInstance();
+//
+//    await prefs.setString('userName', '陈冠希');
+
   }
 
   @override
@@ -190,8 +200,16 @@ class _MainPageState extends State<MainPage>
 }
 
 
-//侧拉
-class MyDrawer extends StatelessWidget {
+
+
+
+
+class MyDrawer extends StatefulWidget {
+  @override
+  _MyDrawerState createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -232,11 +250,18 @@ class MyDrawer extends StatelessWidget {
                     title: const Text('Add account'),
                   ),
                   ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text('语言设置'),
-                    onTap:(){
-                      showAlertDialog(context);
-                    },
+                      leading: const Icon(Icons.settings),
+                      title: const Text('语言设置'),
+                      onTap:()async{
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+//                      int counter = prefs.getInt('counter');
+//                      print(counter);
+                        print('!!!ahdgasdagdahgsdhahgsdgjhajhsdghj');
+                      }
+
+//                        (){
+//                      showAlertDialog(context);
+//                    },
                   ),
                 ],
               ),
@@ -282,3 +307,114 @@ class MyDrawer extends StatelessWidget {
         });
   }
 }
+
+////侧拉
+//class MyDrawer2 extends StatelessWidget {
+//
+//  _incrementCounter() async {
+//    SharedPreferences prefs = await SharedPreferences.getInstance();
+//    int counter = (prefs.getInt('counter') ?? 0) + 1;
+//    print('Pressed $counter times.');
+//    await prefs.setInt('counter', counter);
+//  }
+//
+//
+//
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Drawer(
+//      child: MediaQuery.removePadding(
+//        context: context,
+//        // DrawerHeader consumes top MediaQuery padding.
+//        removeTop: true,
+//        child: Column(
+//          crossAxisAlignment: CrossAxisAlignment.start,
+//          children: <Widget>[
+//            Padding(
+//              padding: const EdgeInsets.only(top: 38.0),
+//              child: Row(
+//                children: <Widget>[
+//                  Padding(
+//                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+//                    child: ClipOval(
+//                      child: Image.asset(
+////                        "imgs/avatar.png",
+//                        "images/11.png",
+//                        width: 80,
+//                        height: 80,
+//                      ),
+//                    ),
+//                  ),
+//                  Text(
+//                    "Wendux",
+//                    style: TextStyle(fontWeight: FontWeight.bold),
+//                  )
+//                ],
+//              ),
+//            ),
+//            Expanded(
+//              child: ListView(
+//                children: <Widget>[
+//                  ListTile(
+//                    leading: const Icon(Icons.add),
+//                    title: const Text('Add account'),
+//                  ),
+//                  ListTile(
+//                    leading: const Icon(Icons.settings),
+//                    title: const Text('语言设置'),
+//                    onTap:()async{
+//                      SharedPreferences prefs = await SharedPreferences.getInstance();
+////                      int counter = prefs.getInt('counter');
+////                      print(counter);
+//                      print('!!!ahdgasdagdahgsdhahgsdgjhajhsdghj');
+//                    }
+//
+////                        (){
+////                      showAlertDialog(context);
+////                    },
+//                  ),
+//                ],
+//              ),
+//            ),
+//          ],
+//        ),
+//      ),
+//    );
+//  }
+//
+//
+//  void showAlertDialog(BuildContext context) {
+//    showDialog(
+//        context: context,
+//        builder: (BuildContext context) {
+//          return SimpleDialog(
+//            title: Text('选择语言'),
+//            children: <Widget>[
+//              SimpleDialogOption(
+//                onPressed: () {
+//                  Locale _locale = const Locale('zh', 'CH');
+//
+//                  Locale localeOf = Localizations.localeOf(context);
+//                  print(localeOf);
+//                  //应该在这儿设置 语言为中文 ,但是 怎么设置呢
+////               freeLocalizationStateKey.currentState.changeLocale(const Locale('zh',"CH"));
+////               Localizations.localeOf(context) =  Locale('zh', 'CN');
+//
+//                  globalKey.currentState.changeLocal(Locale('zh'));
+//                  Navigator.of(context).pop();
+//                },
+//                child: Text('中文'),
+//              ),
+//              SimpleDialogOption(
+//                onPressed: () {
+//                  globalKey.currentState.changeLocal(Locale('en'));
+//                  Navigator.of(context).pop();
+//                },
+//                child: Text('English'),
+//              ),
+//            ],
+//          );
+//        });
+//  }
+//}
