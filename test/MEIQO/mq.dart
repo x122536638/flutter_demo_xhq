@@ -20,12 +20,19 @@ void main() {
 // Locale localeQJ = Locale('zh', 'CN');
 
 class MyApp extends StatefulWidget {
+
+
   @override
   MyAppState createState() => MyAppState();
 }
 
+
+
+
+
 class MyAppState extends State<MyApp> {
   // 供外部使用的_AppSetting实例，用于修改app的状态
+
 
 
 
@@ -40,6 +47,8 @@ class MyAppState extends State<MyApp> {
 
 
     return new MaterialApp(
+
+       theme: ThemeData( platform: TargetPlatform.iOS),
       localizationsDelegates: [
         // 本地化的代理类
         GlobalMaterialLocalizations.delegate,
@@ -52,7 +61,7 @@ class MyAppState extends State<MyApp> {
         //其它Locales
       ],
 //      locale: const Locale('en', 'US'),
-//      locale: const Locale('zh', 'CN'),
+      locale: const Locale('zh', 'CN'),
 
 //      title: DemoLocalizations.of(context).titleBarTitle,//'Welcome to Flutter',
       home: 
@@ -128,8 +137,9 @@ class _XHQSTFWState extends State<XHQSTFW> {
   @override
   Widget build(BuildContext context) {
     return Theme(
+
       data: //primaryColor   primarySwatch
-          ThemeData(
+          ThemeData(platform: TargetPlatform.iOS,
         primaryColor: Color(0xffFFD54F),
       ), //Colors.yellow[600] type 'Color' is not a subtype of type 'MaterialColor'
 //      iconTheme: IconThemeData(color: Colors.teal),

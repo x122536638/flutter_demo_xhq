@@ -46,7 +46,9 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
 //              Scaffold.of(context).openDrawer();//获取state的一种方法
 
               _globalKey.currentState.openDrawer();
+
             },
+
 
 //
           );
@@ -106,6 +108,7 @@ class _ScaffoldRouteState extends State<ScaffoldRoute>
   List getTabList() {
     return tabs
         .map((e) => Tab(
+
               text: e,
             ))
         .toList();
