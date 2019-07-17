@@ -70,6 +70,16 @@ class _MainPageSub1State extends State<MainPageSub1> with AutomaticKeepAliveClie
 
 
 
+            FlatButton(onPressed: (){
+
+            print('按钮点击了');
+            Navigator.of(context).push(
+                MaterialPageRoute(fullscreenDialog: true,builder: (context) => NewRoute()));
+
+
+
+
+            }, child: Text('按钮')),
             Text("sss",textScaleFactor: 10,),
             Text("sss",textScaleFactor: 10,),
             Text("sss",textScaleFactor: 10,),
@@ -188,3 +198,18 @@ class _MainPageSub1State extends State<MainPageSub1> with AutomaticKeepAliveClie
 //    );
 //  }
 //}
+
+
+class NewRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("New route"),
+      ),
+      body: Center(
+        child: Text("This is new route"),
+      ),
+    );
+  }
+}
