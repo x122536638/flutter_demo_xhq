@@ -14,14 +14,21 @@ var bus = new EventBus();
 
 void main() {
   debugPaintSizeEnabled = false;
-  runApp(new MyApp());
+  runApp(new MyApp(key:globalKey2));
 }
 
 // Locale localeQJ = Locale('zh', 'CN');
 
+
+
+GlobalKey<MyAppState> globalKey2 =
+new GlobalKey<MyAppState>();
+
+
 class MyApp extends StatefulWidget {
 
 
+  MyApp({Key key}) : super(key: key);
   @override
   MyAppState createState() => MyAppState();
 }
@@ -34,9 +41,14 @@ class MyAppState extends State<MyApp> {
   // 供外部使用的_AppSetting实例，用于修改app的状态
 
 
+    Locale locale = const Locale('zh', 'CN');
 
 
-
+    changeLocal(Locale l){
+      setState(() {
+        locale = l;
+      });
+    }
 
 
 
@@ -48,7 +60,7 @@ class MyAppState extends State<MyApp> {
 
     return new MaterialApp(
 
-       theme: ThemeData( platform: TargetPlatform.iOS),
+       theme: ThemeData( primaryColor: Colors.amberAccent),
       localizationsDelegates: [
         // 本地化的代理类
         GlobalMaterialLocalizations.delegate,
@@ -61,7 +73,7 @@ class MyAppState extends State<MyApp> {
         //其它Locales
       ],
 //      locale: const Locale('en', 'US'),
-      locale: const Locale('zh', 'CN'),
+      locale: locale,//如果修改这个 则用路由估计没问题
 
 //      title: DemoLocalizations.of(context).titleBarTitle,//'Welcome to Flutter',
       home: 
@@ -76,23 +88,7 @@ class MyAppState extends State<MyApp> {
 
                 }),
       
-//      XHQLocalizations(
-//
-//
-//        child: XHQSTFW(),//页面转换是不是应该换这个child 而不应该用路由切换
-//        key: globalKey,
-//      ),
 
-//      XHQSTFW(),
-
-//      new Scaffold(
-//        appBar: new AppBar(
-//          title: new Text('Welcome to Flutter'),
-//        ),
-//        body: new Center(
-//          child: new Text('Hello World'),
-//        ),
-//      ),
     );
   }
 }
@@ -201,7 +197,7 @@ class _XHQLocalizationsState extends State<XHQLocalizations> {
     return Localizations.override(
       context: context,
       child: widget.child,
-      locale: locale,
+//      locale: locale,
     );
   }
 }
@@ -231,17 +227,17 @@ class _MqWelcomeState extends State<MqWelcome> {
 //      print(textField01.controller.text);
 
     print(myController.text);
-    bus.emit("login",MainPage());
+//    bus.emit("login",MainPage());
 
 //    Navigator.removeRoute(context, route)
 //    Navigator.pop(context, 'Nope!');
-//    Navigator.push(context, new MaterialPageRoute(builder: (context) => new MainPage()));
+    Navigator.push(context, new MaterialPageRoute(builder: (context) => new MainPage()));
 //  Navigator.replace(context, oldRoute: this, newRoute: null)
   }
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    tf0.controller.text = globalKey.currentState.locale.languageCode;
+    tf0.controller.text = globalKey2.currentState.locale.languageCode;
 
     super.didChangeDependencies();
   }
@@ -422,14 +418,14 @@ class _MqWelcomeState extends State<MqWelcome> {
 //               freeLocalizationStateKey.currentState.changeLocale(const Locale('zh',"CH"));
 //               Localizations.localeOf(context) =  Locale('zh', 'CN');
 
-                  globalKey.currentState.changeLocal(Locale('zh'));
+                  globalKey2.currentState.changeLocal(Locale('zh'));
                   Navigator.of(context).pop();
                 },
                 child: Text('中文'),
               ),
               SimpleDialogOption(
                 onPressed: () {
-                  globalKey.currentState.changeLocal(Locale('en'));
+                  globalKey2.currentState.changeLocal(Locale('en'));
                   Navigator.of(context).pop();
                 },
                 child: Text('English'),

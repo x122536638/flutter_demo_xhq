@@ -195,7 +195,7 @@ class ListItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Hero(
-                tag: listItem.title,
+                tag: listItem,
                 child: Image(
                   image: AssetImage(
                       index == 5 ? 'images/jay.jpg' : 'images/pic3.jpg'),
@@ -226,9 +226,9 @@ class ListItemWidget extends StatelessWidget {
 //          );
 
 
-
-      Navigator.of(context).push(
-                        MaterialPageRoute(fullscreenDialog: true,builder: (context) => NewRoute()));
+        Navigator.push(context, new MaterialPageRoute(builder: (context) => new NewRoute()));//可以侧拉 ,
+//      Navigator.of(context).push(
+//                        MaterialPageRoute(fullscreenDialog: true,builder: (context) => NewRoute()));//不可以侧拉 是从底部跳上来,返回按钮是是X
 
 
 
