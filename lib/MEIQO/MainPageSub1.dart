@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'GoodDetialVC.dart';
+
 class MainPageSub1 extends StatefulWidget {
   @override
   _MainPageSub1State createState() => _MainPageSub1State();
@@ -226,7 +228,7 @@ class ListItemWidget extends StatelessWidget {
 //          );
 
 
-        Navigator.push(context, new MaterialPageRoute(builder: (context) => new NewRoute()));//可以侧拉 ,
+        Navigator.push(context, new MaterialPageRoute(builder: (context) => new GoodDetialVC()));//可以侧拉 ,
 //      Navigator.of(context).push(
 //                        MaterialPageRoute(fullscreenDialog: true,builder: (context) => NewRoute()));//不可以侧拉 是从底部跳上来,返回按钮是是X
 

@@ -67,6 +67,7 @@ flutter:
     - images/11.png
     - images/jay.jpg
     - images/pic3.jpg
+    - lib/MEIQO/1.json
 #    - packages/cupertino_icoms/assets/11.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
