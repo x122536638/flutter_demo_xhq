@@ -177,14 +177,16 @@ class CounterIncrementor extends StatelessWidget {
 
 
 class NewRoute extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    final countModel = ScopedModel.of<CountModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("New route"),
       ),
       body: Center(
-        child: Text("This is new route"),
+        child: Text("This is new ute ${countModel.count}"),
       ),
     );
   }
