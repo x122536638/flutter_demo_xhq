@@ -278,16 +278,17 @@ class _MyDrawerState extends State<MyDrawer> {
                   ListTile(
                       leading: const Icon(Icons.settings),
                       title: const Text('语言设置'),
-                      onTap:()async{
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
-//                      int counter = prefs.getInt('counter');
-//                      print(counter);
-                        print('!!!ahdgasdagdahgsdhahgsdgjhajhsdghj');
-                      }
+                      onTap:
+//                          ()async{
+//                        SharedPreferences prefs = await SharedPreferences.getInstance();
+////                      int counter = prefs.getInt('counter');
+////                      print(counter);
+//                        print('!!!ahdgasdagdahgsdhahgsdgjhajhsdghj');
+//                      }
 
-//                        (){
-//                      showAlertDialog(context);
-//                    },
+                        (){
+                      showAlertDialog(context);
+                    },
                   ),
                 ],
               ),
