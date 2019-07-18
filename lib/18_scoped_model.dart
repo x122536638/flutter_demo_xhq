@@ -186,13 +186,21 @@ class NewRoute extends StatelessWidget {
         title: Text("New route"),
       ),
       body: Center(
-        child: Text("This is new ute ${countModel.count}"),
+        child: Text("This is new ute ${countModel.count}   ${countModel.text}"),
       ),
     );
   }
 }
 
-class CountModel extends Model{
+
+
+class AA{
+
+String text ='haha';
+
+}
+
+class CountModel extends Model with AA{
   int _count = 0;
   get count => _count;
 
