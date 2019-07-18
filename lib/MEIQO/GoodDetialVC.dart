@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_xhq1/MEIQO/Bean/Book.dart';
+import 'dart:convert';
 
 class GoodDetialVC extends StatefulWidget {
   @override
@@ -25,9 +26,13 @@ class _GoodDetialVCState extends State<GoodDetialVC> {
    String string = await DefaultAssetBundle.
     of(context).
     loadString('lib/MEIQO/1.json');
+   Map valueMap = json.decode(string);
+
+   var book = Book.fromJsonMap(valueMap);
 
 
-   print(string);
+
+   print(book.title);
   }
 
   @override
