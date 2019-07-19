@@ -169,7 +169,7 @@ class GridViewState extends State<GridViewPage> with AutomaticKeepAliveClientMix
         itemCount: listData.length,
         itemBuilder: (BuildContext context, int index) {
 
-          return ListItemWidget(listData[index], index)
+          return ListItemWidget(listItem: listData[index],index: index,)
             ..onClick = _click;
 
         },
@@ -206,15 +206,24 @@ class ListItem {
 
 
 
-class ListItemWidget extends StatelessWidget {
+class ListItemWidget extends StatefulWidget {
   final ListItem listItem;
   final int index;
   void Function(int) onClick;
 
 
+  ListItemWidget({this.listItem, this.index});
+
+  @override
+  _ListItemWidgetState createState() => _ListItemWidgetState();
+}
+
+class _ListItemWidgetState extends State<ListItemWidget> {
 
 
-  ListItemWidget(this.listItem, this.index);
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -225,10 +234,10 @@ class ListItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Hero(
-                tag: listItem,
+                tag: widget.listItem,
                 child: Image(
-                  image: AssetImage(listItem.image
-                      ),
+                  image: AssetImage(widget.listItem.image
+                  ),
                   width: 150.0,
                   height: 150.0,
                   fit: BoxFit.fill,
@@ -243,11 +252,16 @@ class ListItemWidget extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      listItem.title,
+                      widget.listItem.title,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  FlatButton(child: Icon(Icons.star_border,color: listItem.islike?Colors.red:Colors.black26),),
+                  GestureDetector(child: Icon(Icons.star_border,color: widget.listItem.islike?Colors.red:Colors.black26),onTap: (){
+                    widget.listItem.islike = !widget.listItem.islike;
+                    setState(() {
+
+                    });
+                  },),
                 ],
               ),
             )
@@ -269,7 +283,7 @@ class ListItemWidget extends StatelessWidget {
 
 //        listData[i];
 
-      onClick(index);
+        widget.onClick(widget.index);
 //        Navigator.push(context, new MaterialPageRoute(builder: (context) => new GoodDetialVC()));//可以侧拉 ,
 
 //      Navigator.of(context).push(
@@ -288,6 +302,91 @@ class ListItemWidget extends StatelessWidget {
     );
   }
 }
+
+//class ListItemWidget extends StatelessWidget {
+//  final ListItem listItem;
+//  final int index;
+//  void Function(int) onClick;
+//
+//
+//
+//
+//  ListItemWidget(this.listItem, this.index);
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return GestureDetector(
+//      child: Container(
+//        color: Colors.green,
+//        child: Column(
+//          mainAxisAlignment: MainAxisAlignment.center,
+//          children: <Widget>[
+//            Hero(
+//                tag: listItem,
+//                child: Image(
+//                  image: AssetImage(listItem.image
+//                      ),
+//                  width: 150.0,
+//                  height: 150.0,
+//                  fit: BoxFit.fill,
+//                  /*listItem.iconData,
+//                size: 50.0,
+//                color: Colors.white,*/
+//                )),
+//            Padding(
+//              padding: const EdgeInsets.symmetric(horizontal: 20),
+//              child: Row(
+//                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                children: <Widget>[
+//                  Expanded(
+//                    child: Text(
+//                      listItem.title,
+//                      style: TextStyle(color: Colors.white),
+//                    ),
+//                  ),
+//                  FlatButton(child: Icon(Icons.star_border,color: listItem.islike?Colors.red:Colors.black26),onPressed: (){
+//                    listItem.islike = !listItem.islike;
+//                  },),
+//                ],
+//              ),
+//            )
+//          ],
+//        ),
+//      ),
+//      onTap: () {
+//        /*Scaffold.of(context).showSnackBar(new SnackBar(
+//          content: new Text(listItem.title),
+//        ));*/
+////        Navigator.of(context).push(PageRouteBuilder(pageBuilder:
+////            (BuildContext context, Animation<double> animation,
+////            Animation<double> secondaryAnimation) {
+////          return Scaffold(
+////
+////            body: Center(child: Text(listItem.title)),
+////          );
+//
+//
+////        listData[i];
+//
+//      onClick(index);
+////        Navigator.push(context, new MaterialPageRoute(builder: (context) => new GoodDetialVC()));//可以侧拉 ,
+//
+////      Navigator.of(context).push(
+////                        MaterialPageRoute(fullscreenDialog: true,builder: (context) => NewRoute()));//不可以侧拉 是从底部跳上来,返回按钮是是X
+//
+//
+//
+//
+//
+//
+//
+////            MyHomePage(tag: listItem.title);
+////        }));
+//
+//      },
+//    );
+//  }
+//}
 
 
 

@@ -77,7 +77,7 @@ class _GoodDetialVCState extends State<GoodDetialVC> {
           GestureDetector(
             onTap: (){
               setState(() {
-                
+
               });
               widget.item.islike =!widget.item.islike;
             },
