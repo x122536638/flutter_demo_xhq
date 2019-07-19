@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'GoodDetialVC.dart';
+import 'dart:math';
 
 class MainPageSub1 extends StatefulWidget {
   @override
@@ -140,12 +141,14 @@ class GridViewPage extends StatefulWidget {
 
 class GridViewState extends State<GridViewPage> with AutomaticKeepAliveClientMixin {
   final List<ListItem> listData = [];
+//  images/jay.jpg
 
+  List list = ['images/jay.jpg','images/pic3.jpg'];
   @override
   void initState() {
     super.initState();
     for (int i = 0; i < 20; i++) {
-      listData.add(new ListItem("我是测试标题$i", Icons.cake));
+      listData.add(new ListItem("我是测试标题$i", Icons.cake,list[Random().nextInt(2)]));
     }
   }
 
@@ -165,11 +168,27 @@ class GridViewState extends State<GridViewPage> with AutomaticKeepAliveClientMix
         ),
         itemCount: listData.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListItemWidget(listData[index], index);
+
+          return ListItemWidget(listData[index], index)
+            ..onClick = _click;
+
         },
       ),
     );
   }
+
+//  typedef CallBackInt = void Function(int);
+
+  Function _click(int index){
+    print('lalalal');
+
+    ListItem item = listData[index];
+
+    Navigator.push(context, new MaterialPageRoute(builder: (context) => new GoodDetialVC(item)));//可以侧拉 ,
+
+
+  }
+
 
   @override
   // TODO: implement wantKeepAlive
@@ -179,13 +198,21 @@ class GridViewState extends State<GridViewPage> with AutomaticKeepAliveClientMix
 class ListItem {
   final String title;
   final IconData iconData;
+  final String image;
 
-  ListItem(this.title, this.iconData);
+  ListItem(this.title, this.iconData,this.image);
 }
+
+
 
 class ListItemWidget extends StatelessWidget {
   final ListItem listItem;
   final int index;
+  void Function(int) onClick;
+
+
+
+
   ListItemWidget(this.listItem, this.index);
 
   @override
@@ -199,8 +226,8 @@ class ListItemWidget extends StatelessWidget {
             Hero(
                 tag: listItem,
                 child: Image(
-                  image: AssetImage(
-                      index == 5 ? 'images/jay.jpg' : 'images/pic3.jpg'),
+                  image: AssetImage(listItem.image
+                      ),
                   width: 150.0,
                   height: 150.0,
                   fit: BoxFit.fill,
@@ -228,7 +255,11 @@ class ListItemWidget extends StatelessWidget {
 //          );
 
 
-        Navigator.push(context, new MaterialPageRoute(builder: (context) => new GoodDetialVC()));//可以侧拉 ,
+//        listData[i];
+
+      onClick(index);
+//        Navigator.push(context, new MaterialPageRoute(builder: (context) => new GoodDetialVC()));//可以侧拉 ,
+
 //      Navigator.of(context).push(
 //                        MaterialPageRoute(fullscreenDialog: true,builder: (context) => NewRoute()));//不可以侧拉 是从底部跳上来,返回按钮是是X
 
@@ -261,12 +292,92 @@ class PPP extends StatelessWidget {
 class NewRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+
+
+    Widget widget2 = new Container(
+      padding: EdgeInsets.all(32),
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+              child: new Column(
+//        mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Container(
+                    child: new Text(
+                      "dadadasdasdasd  daadadaad",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    padding: EdgeInsets.only(bottom: 8),
+                  ),
+                  new Text("第二行文本lsdllsdaddd"),
+                ],
+              )),
+          new Icon(
+            Icons.star,
+            color: Colors.red,
+          ),
+          new Text(
+            '41',
+            style: TextStyle(fontSize: 18),
+          ),
+        ],
+      ),
+    );
+
+//widge3
+
+    Column buildbutton(IconData icondata, String str) {
+      return new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Icon(
+            icondata,
+            color: Theme.of(context).primaryColor,
+          ),
+          new Container(
+            margin: EdgeInsets.only(top: 8),
+            child: new Text(
+              str,
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        ],
+      );
+    }
+
+    Row buttonsection = new Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        buildbutton(Icons.print, "trsss"),
+        buildbutton(Icons.print, "trsss"),
+        buildbutton(Icons.print, "trsss"),
+        buildbutton(Icons.print, "trsss"),
+      ],
+    );
+
+    Widget textSection = new Container(
+      padding: EdgeInsets.all(32),
+      child: new Text(
+        "Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alps. Situated 1,578 meters above sea level, it is one of the larger Alpine Lakes. A gondola ride from Kandersteg, followed by a half-hour walk through pastures and pine forest, leads you to the lake, which warms to 20 degrees Celsius in the summer. Activities enjoyed here include rowing, and riding the summer toboggan run.",
+        softWrap: true,
+      ),
+    );
+
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("New route"),
       ),
-      body: Center(
-        child: Text("This is new route"),
+      body: new ListView(
+        children: <Widget>[
+          new Image.asset("images/11.png", height: 400, fit: BoxFit.cover),
+          widget2,
+          buttonsection,
+          textSection,
+        ],
       ),
     );
   }
