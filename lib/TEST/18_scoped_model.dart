@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 void main() {
-  runApp( ScopedModel(
-    model:  CountModel(),
+  runApp(ScopedModel<CountModel>(
+    model: CountModel(),
     child: MaterialApp(
       title: 'Flutter Tutorial',
       home: new TutorialHome(),
@@ -36,38 +36,34 @@ class TutorialHome extends StatelessWidget {
       body: new Center(
 //        child: new Text('Hello, world!'),
 //        child: new MyButton(),
-      child: new Counter(),
+        child: new Counter(),
       ),
 
       floatingActionButton: new FloatingActionButton(
         tooltip: 'Add', // used by assistive technologies
         child: new Icon(Icons.add),
-        onPressed: (){
-
-          Navigator.push(context, new MaterialPageRoute(builder: (context) => new NewRoute()));//可以侧拉 ,
+        onPressed: () {
+          Navigator.push(
+              context,
+              new MaterialPageRoute(
+                  builder: (context) => new NewRoute())); //可以侧拉 ,
           //      Navigator.of(context).push(
           //                        MaterialPageRoute(fullscreenDialog: true,builder: (context) => NewRoute()));//不可以侧拉 是从底部跳上来,返回按钮是是X
-
-
-
-
         },
       ),
     );
   }
 }
 
-
-class MyButton extends StatelessWidget{
+class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new GestureDetector(
-
-      onDoubleTap:(){
+      onDoubleTap: () {
         print('双击');
       },
-      onLongPress: (){
+      onLongPress: () {
         print("长按");
       },
       child: new Container(
@@ -77,16 +73,15 @@ class MyButton extends StatelessWidget{
         height: 36.0,
         padding: EdgeInsets.all(8.0),
         margin: EdgeInsets.symmetric(horizontal: 5.0),
-        decoration:BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.red,
 //          borderRadius: BorderRadius.circular(5.0),
-        borderRadius: BorderRadius.all(Radius.elliptical(100, 100)),
-        ) ,
+          borderRadius: BorderRadius.all(Radius.elliptical(100, 100)),
+        ),
       ),
     );
   }
 }
-
 
 class Counter extends StatefulWidget {
   // This class is the configuration for the state. It holds the
@@ -98,22 +93,11 @@ class Counter extends StatefulWidget {
 }
 
 class _CounterState extends State<Counter> {
-
-
-
   void _increment() {
-
     final countModel = ScopedModel.of<CountModel>(context);
     countModel.increment();
 
-    setState(() {
-      // This call to setState tells the Flutter framework that
-      // something has changed in this State, which causes it to rerun
-      // the build method below so that the display can reflect the
-      // updated values. If we changed _counter without calling
-      // setState(), then the build method would not be called again,
-      // and so nothing would appear to happen.
-    });
+
   }
 
   @override
@@ -128,7 +112,6 @@ class _CounterState extends State<Counter> {
     final countModel = ScopedModel.of<CountModel>(context);
     return new Row(
       children: <Widget>[
-
 //        new ButtonBar(children: <Widget>[
 //          new IconButton(icon: new Icon(Icons.map), onPressed: null),
 //          new FlatButton(onPressed: null, child: new Text('flatButton')),
@@ -138,18 +121,17 @@ class _CounterState extends State<Counter> {
 //          child: new Text('Incrementsss'),
 //        ),
 //        new Text('Count: $_counter'),
-      new CounterIncrementor(onPressed: _increment),
-      new CountDisplay(count: countModel.count,),
+        new CounterIncrementor(onPressed: _increment),
+        new CountDisplay(
+          count: countModel.count,
+        ),
       ],
     );
   }
 }
 
-
 //显示数据的Widget
-class CountDisplay extends StatelessWidget{
-
-
+class CountDisplay extends StatelessWidget {
   final int count;
 
   CountDisplay({this.count});
@@ -158,57 +140,95 @@ class CountDisplay extends StatelessWidget{
     // TODO: implement build
     return new Text('Count $count');
   }
-
 }
 
-
 class CounterIncrementor extends StatelessWidget {
-
-
   final VoidCallback onPressed;
   CounterIncrementor({this.onPressed});
   @override
   Widget build(BuildContext context) {
-    return  new RaisedButton(onPressed: onPressed,child: new Text("increment"),);
+    return new RaisedButton(
+      onPressed: onPressed,
+      child: new Text("increment"),
+    );
 //      new RaisedButton.icon(onPressed: onPressed, label: new Text("increment"));
   }
 }
 
-
-
 class NewRoute extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final countModel = ScopedModel.of<CountModel>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("New route"),
-      ),
-      body: Center(
-        child: Text("This is new ute ${countModel.count}   ${countModel.text}"),
-      ),
+//    final ScopedModel<Model> countModel = ScopedModel.of(context);
+
+//    ScopedModelDescendant
+
+    return ScopedModelDescendant<CountModel>(
+//      child: Scaffold(
+//        appBar: AppBar(
+//          title: Text("New route"),
+//        ),
+//        body: Center(
+//          child:
+//              Text("This is new ute ${countModel.count}   ${countModel.text}"),
+//        ),
+//        floatingActionButton: FloatingActionButton(
+//          onPressed: () {
+//            countModel.increment();
+//          },
+//          child: Text('修改'),
+//        ),
+//      ),
+      builder: (
+        BuildContext context,
+        Widget child,
+        CountModel model,
+      ) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("New route"),
+          ),
+          body: Center(
+            child: Text(
+                "This is new ute ${countModel.count}   ${countModel.text}"),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              countModel.increment();
+            },
+            child: Text('修改'),
+          ),
+        );
+      },
     );
+//      Scaffold(
+//      appBar: AppBar(
+//        title: Text("New route"),
+//      ),
+//      body: Center(
+//        child: Text("This is new ute ${countModel.count}   ${countModel.text}"),
+//      ),
+//      floatingActionButton: FloatingActionButton(onPressed: (){
+//
+//        countModel.increment();
+//
+//      },child: Text('修改'),) ,
+//    );
   }
 }
 
-
-
-class AA{
-
-String text ='haha';
-
+class AA {
+  String text = 'haha';
 }
 
-class CountModel extends Model with AA{
+class CountModel extends Model with AA {
   int _count = 0;
   get count => _count;
 
-  void increment(){
+  void increment() {
     _count++;
     notifyListeners();
   }
 
-  CountModel of(context) =>
-      ScopedModel.of<CountModel>(context);
+  CountModel of(context) => ScopedModel.of<CountModel>(context);
 }
