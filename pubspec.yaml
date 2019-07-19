@@ -30,8 +30,11 @@ dependencies:
   #文件操作
   path_provider: ^0.4.1
   flutter_redux: ^0.5.3
+  dio: ^2.1.13
 
   shared_preferences: ^0.5.3+3
+
+
 
 
   scoped_model: ^1.0.1

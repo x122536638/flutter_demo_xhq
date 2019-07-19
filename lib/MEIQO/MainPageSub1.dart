@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,88 +35,98 @@ class _MainPageSub1State extends State<MainPageSub1>
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.red,
-        child: Container(
-          child: Column(
-            children: <Widget>[
-//          GridView(scrollDirection: Axis.horizontal,gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),),
-
-              Container(
-                height: 40,
-                child: TabBar(controller: _tabController, tabs: getTabList()),
-//                GridView(
-////              shrinkWrap:true,
-//                  scrollDirection: Axis.horizontal,
-//                  gridDelegate:
-////                SliverGridDelegateWithMaxCrossAxisExtent(
-////                    maxCrossAxisExtent: 1000000.0,//流动方向交叉方向的 宽度
-////
-////                    childAspectRatio: 2.0 //
-////                ),
+    return FutureBuilder(
+      future:  Dio().get("www.baidu.com"),
+      builder:( context,  snapshot){
+        if(snapshot.connectionState ==ConnectionState.done){
+          return Text("DOWN");
+        }else{
+          return Text("loading");
+        }
+      } ,
+//      child: Container(
+//          color: Colors.red,
+//          child: Container(
+//            child: Column(
+//              children: <Widget>[
+////          GridView(scrollDirection: Axis.horizontal,gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),),
 //
-//                      SliverGridDelegateWithFixedCrossAxisCount(
-//                    crossAxisCount: 1, //横轴三个子widget
-//                    childAspectRatio: 1.0, //宽高比为1时，子widget
-//                    crossAxisSpacing: 200,
-//                  ),
-//                  children: <Widget>[
-//                    Icon(Icons.ac_unit),
-//                    Icon(Icons.airport_shuttle),
-//                    Icon(Icons.all_inclusive),
-//                    Icon(Icons.beach_access),
-//                    Icon(Icons.cake),
-//                    Icon(Icons.ac_unit),
-//                    Icon(Icons.airport_shuttle),
-//                    Icon(Icons.all_inclusive),
-//                    Icon(Icons.beach_access),
-//                    Icon(Icons.cake),
-//                    Icon(Icons.ac_unit),
-//                    Icon(Icons.airport_shuttle),
-//                    Icon(Icons.all_inclusive),
-//                    Icon(Icons.beach_access),
-//                    Icon(Icons.cake),
-//                    Icon(Icons.ac_unit),
-//                    Icon(Icons.airport_shuttle),
-//                    Icon(Icons.all_inclusive),
-//                    Icon(Icons.beach_access),
-//                    Icon(Icons.cake),
-//                    Icon(Icons.free_breakfast)
-//                  ],
-////            scrollDirection: Axis.horizontal,
+//                Container(
+//                  height: 40,
+//                  child: TabBar(controller: _tabController, tabs: getTabList()),
+////                GridView(
+//////              shrinkWrap:true,
+////                  scrollDirection: Axis.horizontal,
+////                  gridDelegate:
+//////                SliverGridDelegateWithMaxCrossAxisExtent(
+//////                    maxCrossAxisExtent: 1000000.0,//流动方向交叉方向的 宽度
+//////
+//////                    childAspectRatio: 2.0 //
+//////                ),
+////
+////                      SliverGridDelegateWithFixedCrossAxisCount(
+////                    crossAxisCount: 1, //横轴三个子widget
+////                    childAspectRatio: 1.0, //宽高比为1时，子widget
+////                    crossAxisSpacing: 200,
+////                  ),
+////                  children: <Widget>[
+////                    Icon(Icons.ac_unit),
+////                    Icon(Icons.airport_shuttle),
+////                    Icon(Icons.all_inclusive),
+////                    Icon(Icons.beach_access),
+////                    Icon(Icons.cake),
+////                    Icon(Icons.ac_unit),
+////                    Icon(Icons.airport_shuttle),
+////                    Icon(Icons.all_inclusive),
+////                    Icon(Icons.beach_access),
+////                    Icon(Icons.cake),
+////                    Icon(Icons.ac_unit),
+////                    Icon(Icons.airport_shuttle),
+////                    Icon(Icons.all_inclusive),
+////                    Icon(Icons.beach_access),
+////                    Icon(Icons.cake),
+////                    Icon(Icons.ac_unit),
+////                    Icon(Icons.airport_shuttle),
+////                    Icon(Icons.all_inclusive),
+////                    Icon(Icons.beach_access),
+////                    Icon(Icons.cake),
+////                    Icon(Icons.free_breakfast)
+////                  ],
+//////            scrollDirection: Axis.horizontal,
+////                ),
 //                ),
-              ),
-
-
-
-              Expanded(
-                flex: 1,
-                child: Container(
-                  color: Colors.deepPurpleAccent,
-                  child: TabBarView(
-
-                    controller: _tabController,
-                    children: tabs.map((e) {
-                      return Container(
-                        alignment: Alignment.center,
-                        child:
-                        GridViewPage(),
-
-//                        Text(
-//                          e,
-//                          textScaleFactor: 5,
-//                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-
-
-
-            ],
-          ),
-        ));
+//
+//
+//
+//                Expanded(
+//                  flex: 1,
+//                  child: Container(
+//                    color: Colors.deepPurpleAccent,
+//                    child: TabBarView(
+//
+//                      controller: _tabController,
+//                      children: tabs.map((e) {
+//                        return Container(
+//                          alignment: Alignment.center,
+//                          child:
+//                          GridViewPage(),
+//
+////                        Text(
+////                          e,
+////                          textScaleFactor: 5,
+////                        ),
+//                        );
+//                      }).toList(),
+//                    ),
+//                  ),
+//                ),
+//
+//
+//
+//              ],
+//            ),
+//          )),
+    );
   }
 
   @override
