@@ -196,6 +196,7 @@ class GridViewState extends State<GridViewPage> with AutomaticKeepAliveClientMix
 }
 
 class ListItem {
+  bool islike = false;
   final String title;
   final IconData iconData;
   final String image;
@@ -235,9 +236,20 @@ class ListItemWidget extends StatelessWidget {
                 size: 50.0,
                 color: Colors.white,*/
                 )),
-            Text(
-              listItem.title,
-              style: TextStyle(color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      listItem.title,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  FlatButton(child: Icon(Icons.star_border,color: listItem.islike?Colors.red:Colors.black26),),
+                ],
+              ),
             )
           ],
         ),

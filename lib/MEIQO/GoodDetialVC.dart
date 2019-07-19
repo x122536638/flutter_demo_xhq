@@ -74,9 +74,17 @@ class _GoodDetialVCState extends State<GoodDetialVC> {
                   new Text("第二行文本lsdllsdaddd"),
                 ],
               )),
-          new Icon(
-            Icons.star,
-            color: Colors.red,
+          GestureDetector(
+            onTap: (){
+              setState(() {
+                
+              });
+              widget.item.islike =!widget.item.islike;
+            },
+            child: new Icon(
+              Icons.star,
+              color:  widget.item.islike?Colors.red:Colors.black38,
+            ),
           ),
           new Text(
             '41',
