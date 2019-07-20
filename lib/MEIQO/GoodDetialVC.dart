@@ -1,15 +1,9 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_xhq1/MEIQO/Bean/Book.dart';
 import 'dart:convert';
 
 import 'MainPageSub1.dart';
-
-
-
-
-
 
 class GoodDetialVC extends StatefulWidget {
   ListItem item;
@@ -21,8 +15,6 @@ class GoodDetialVC extends StatefulWidget {
 }
 
 class _GoodDetialVCState extends State<GoodDetialVC> {
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -32,29 +24,18 @@ class _GoodDetialVCState extends State<GoodDetialVC> {
 //    Book.fromJsonMap();
   }
 
-
   loaddata() async {
-   String string = await DefaultAssetBundle.
-    of(context).
-    loadString('lib/MEIQO/1.json');
-   Map valueMap = json.decode(string);
+    String string =
+        await DefaultAssetBundle.of(context).loadString('lib/MEIQO/1.json');
+    Map valueMap = json.decode(string);
 
-   var book = Book.fromJsonMap(valueMap);
+    var book = Book.fromJsonMap(valueMap);
 
-
-
-   print(book.title);
+    print(book.title);
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
-
-
-
     Widget widget2 = new Container(
       padding: EdgeInsets.all(32),
       child: new Row(
@@ -62,28 +43,26 @@ class _GoodDetialVCState extends State<GoodDetialVC> {
           new Expanded(
               child: new Column(
 //        mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  new Container(
-                    child: new Text(
-                      "dadadasdasdasd  daadadaad",
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    padding: EdgeInsets.only(bottom: 8),
-                  ),
-                  new Text("第二行文本lsdllsdaddd"),
-                ],
-              )),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Container(
+                child: new Text(
+                  "dadadasdasdasd  daadadaad",
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+                padding: EdgeInsets.only(bottom: 8),
+              ),
+              new Text("第二行文本lsdllsdaddd"),
+            ],
+          )),
           GestureDetector(
-            onTap: (){
-              setState(() {
-
-              });
-              widget.item.islike =!widget.item.islike;
+            onTap: () {
+              setState(() {});
+              widget.item.islike = !widget.item.islike;
             },
             child: new Icon(
               Icons.star,
-              color:  widget.item.islike?Colors.red:Colors.black38,
+              color: widget.item.islike ? Colors.red : Colors.black38,
             ),
           ),
           new Text(
@@ -128,27 +107,44 @@ class _GoodDetialVCState extends State<GoodDetialVC> {
     Widget textSection = new Container(
       padding: EdgeInsets.all(32),
       child: new Text(
-        "Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alps. Situated 1,578 meters above sea level, it is one of the larger Alpine Lakes. A gondola ride from Kandersteg, followed by a half-hour walk through pastures and pine forest, leads you to the lake, which warms to 20 degrees Celsius in the summer. Activities enjoyed here include rowing, and riding the summer toboggan run.",
+        "Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLakLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese AlpsLake Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alpse Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alps. Situated 1,578 meters above sea level, it is one of the larger Alpine Lakes. A gondola ride from Kandersteg, followed by a half-hour walk through pastures and pine forest, leads you to the lake, which warms to 20 degrees Celsius in the summer. Activities enjoyed here include rowing, and riding the summer toboggan run.",
         softWrap: true,
       ),
     );
 
-
+//    return Scaffold(
+//      appBar: AppBar(
+//        title: Text(widget.item.title),
+//      ),
+//      body: new ListView(
+//        children: <Widget>[
+//          new Image.asset(widget.item.image, height: 400, fit: BoxFit.cover),
+//          widget2,
+//          buttonsection,
+//          textSection,
+//        ],
+//      ),
+//    );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.item.title),
-      ),
-      body: new ListView(
-        children: <Widget>[
-          new Image.asset(widget.item.image, height: 400, fit: BoxFit.cover),
-          widget2,
-          buttonsection,
-          textSection,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            title: Text('biaoti'),
+            expandedHeight: 400,
+            flexibleSpace: FlexibleSpaceBar(
+              background: new Image.asset(widget.item.image,
+                  height: 400, fit: BoxFit.cover),
+            ),
+            floating: true,
+          ),
+          SliverToBoxAdapter(child: Column(
+            children: <Widget>[widget2,
+              buttonsection,
+              textSection,],
+          ),),
         ],
       ),
     );
   }
-
-
 }
