@@ -71,32 +71,47 @@ class CacheZiLei2 extends Cache<String>{
 }
 
 
+//泛型
+
+//class Cache2<T> {
+//  T getByKey(String key){
+//  }
+//  setByKey(String key, T value){
+//  print(value.runtimeType);
+//  }
+//}
+//
+//main(){
+//
+//
+//
+//  CacheZiLei obj01 = CacheZiLei();
+////  obj01.setByKey('key1', 'ss');//报错
+//  obj01.setByKey('key1', 100);
+//
+//
+//  Cache2 obj = Cache2<double>();
+////  obj.setByKey('key1', 'sss');//会报错
+//  obj.setByKey('key1', 0.1);
+//
+//
+//  Cache2  obj2 =Cache2();
+//  obj2.setByKey('ss', 'ss');
+//}
 
 
-class Cache2<T> {
-  T getByKey(String key){
-  }
-  setByKey(String key, T value){
-  print(value.runtimeType);
-  }
-}
-
-main(){
 
 
-
-  CacheZiLei obj01 = CacheZiLei();
-//  obj01.setByKey('key1', 'ss');//报错
-  obj01.setByKey('key1', 100);
-
-
-  Cache2 obj = Cache2<double>();
-//  obj.setByKey('key1', 'sss');//会报错
-  obj.setByKey('key1', 0.1);
-
-
-  Cache2  obj2 =Cache2();
-  obj2.setByKey('ss', 'ss');
-}
-
+//class FX<T>{
+//
+//  f1(T p1){
+//    print(p1.runtimeType);
+//  }
+//
+//}
+//
+//void main(){
+//  FX<double> fx = FX<double>();
+//  fx.f1('111');
+//}
 

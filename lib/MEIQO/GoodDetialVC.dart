@@ -126,6 +126,9 @@ class _GoodDetialVCState extends State<GoodDetialVC> {
 //      ),
 //    );
 
+    
+    
+   List<Widget> list = new List.generate(20, (i)=> Container(color: Colors.red[i%9 *100],child: SizedBox(width: 50,height: 50,),));
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -133,16 +136,28 @@ class _GoodDetialVCState extends State<GoodDetialVC> {
             title: Text('biaoti'),
             expandedHeight: 400,
             flexibleSpace: FlexibleSpaceBar(
-              background: new Image.asset(widget.item.image,
-                  height: 400, fit: BoxFit.cover),
+              background:  Hero(
+                tag: widget.item,
+                child: Image.asset(widget.item.image,
+                    height: 400, fit: BoxFit.cover),
+              ),
             ),
-            floating: true,
+//            floating: true,
           ),
-          SliverToBoxAdapter(child: Column(
-            children: <Widget>[widget2,
-              buttonsection,
-              textSection,],
-          ),),
+//          SliverToBoxAdapter(child: Column(
+//            children: <Widget>[widget2,
+//              buttonsection,
+//              textSection,],
+//          ),),
+
+        SliverList(delegate:SliverChildListDelegate(<Widget>[
+          widget2,
+          buttonsection,
+          textSection,
+        ]) ,),
+
+//          SliverGrid.count(crossAxisCount: 4,children:list,)
+        SliverGrid.extent(maxCrossAxisExtent: 120,children: list,),
         ],
       ),
     );

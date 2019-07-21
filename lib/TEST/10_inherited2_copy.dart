@@ -73,17 +73,6 @@ class _InheritedWigetTestContainerState
     print('_InheritedWigetTestContainerState    initstate');
   }
 
-
-
-
-  //  @override
-//  void didChangeDependencies() {
-//    super.didChangeDependencies();
-//    //父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
-//    //如果build中没有依赖InheritedWidget，则此回调不会被调用。
-//    print("Dependencies change");
-//  }
-
   f1() {
     setState(() {
       model = InheritedTestModel(model.count + 1);
@@ -96,8 +85,6 @@ class _InheritedWigetTestContainerState
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
 //
@@ -108,23 +95,21 @@ class _InheritedWigetTestContainerState
 //    ],),)
 //    );
 
-
-
     return InheritedContext(
         inheritedTestModel: model,
         increment: f1,
         reduce: f2,
         child: Container(
           child: Column(
-            children: <Widget>[TestWidgetA(), TestWidgetB(), TestWidgetC(),TestWidgetD(),],
+            children: <Widget>[TestWidgetA(), TestWidgetB(), TestWidgetC()],
           ),
         ));
   }
 }
 
 class InheritedTestModel {
-   int count;
-   InheritedTestModel(this.count);
+  final int count;
+  const InheritedTestModel(this.count);
 }
 
 class InheritedContext extends InheritedWidget {
@@ -158,20 +143,12 @@ class InheritedContext extends InheritedWidget {
   @override
   bool updateShouldNotify(InheritedContext oldWidget) {
     // TODO: implement updateShouldNotify
-     bool  xx = inheritedTestModel != oldWidget.inheritedTestModel;
-    print(xx);
-    return xx;
-//  return true;
+    return inheritedTestModel != oldWidget.inheritedTestModel;
   }
 
 }
 
 class TestWidgetA extends StatelessWidget {
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     final inheritedContext = InheritedContext.of(context);
@@ -222,46 +199,7 @@ class TestWidgetC extends StatelessWidget {
       child: new RaisedButton(
           textColor: Colors.black,
           child: new Text('-'),
-          onPressed: inheritedContext.reduce),//必须在父层定义 函数,  可以改变ihertied的构造函数
-//          onPressed: (){
-//            inheritedTestModel.count--;
-//          }),
-
+          onPressed: inheritedContext.reduce),
     );
   }
 }
-
-
-class TestWidgetD extends StatefulWidget {
-  @override
-  _TestWidgetDState createState() => _TestWidgetDState();
-}
-
-class _TestWidgetDState extends State<TestWidgetD> {
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    print('D BUILD');
-    final inheritedContext = InheritedContext.of(context);
-//
-//    final inheritedTestModel = inheritedContext.inheritedTestModel;
-    return Container(
-//      child: Text(inheritedTestModel.count.toString()),
-
-
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-
-
-  super.didChangeDependencies();
-
-
-  print('D   didChangeDependencies');
-  }
-}
-

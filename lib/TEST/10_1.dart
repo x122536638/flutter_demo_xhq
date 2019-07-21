@@ -107,6 +107,12 @@ class InheritedWidgetTestRoute extends StatefulWidget {
 
 class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
   int count = 0;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    print('didChangeDependencies');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +129,12 @@ class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
             RaisedButton(
               child: Text("Increment"),
               //每点击一次，将count自增，然后重新build,ShareDataWidget的data将被更新
-              onPressed: () => setState(() => ++count),
+              onPressed: () {
+                setState(() {//每次都新使用ShareDataWidget 缺点就是这个事件 必须
+//                能更新ShareDataWidget
+                  count ++;//
+                });
+              },
             )
           ],
         ),
