@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'Config.dart';
 import 'MainPageSub1.dart';
-import 'mq.dart';
+import 'main.dart';
 import 'MQInternationalization.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
