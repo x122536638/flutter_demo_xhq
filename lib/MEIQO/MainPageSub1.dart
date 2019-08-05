@@ -32,6 +32,25 @@ class _MainPageSub1State extends State<MainPageSub1>
     super.initState();
 
     _tabController = TabController(length: tabs.length, vsync: this);
+    _tabController.addListener((){
+
+      switch (_tabController.index) {
+        case 0:
+          print(1);
+          break;
+        case 1:
+          print(2);
+          break;
+        case 2:
+          print(3);
+          break;
+        default:
+          break;
+      }
+
+    });
+
+
   }
   @override
   Widget build(BuildContext context) {

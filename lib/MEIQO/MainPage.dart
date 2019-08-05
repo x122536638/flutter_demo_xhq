@@ -130,6 +130,7 @@ class _MainPageState extends State<MainPage>
                 return
 //            MainPageSub1();
                     pages[index]; //这个报错啊
+//                Text("222");
                 //Text(tabs[index]);
 //            index == 1 ? new Text("page1") : new Text('Page2');
               },

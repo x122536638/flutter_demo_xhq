@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  Widget redBox = DecoratedBox(
+
+
+
+
+  Widget redBox=DecoratedBox(
     decoration: BoxDecoration(color: Colors.red),
   );
 
   @override
   Widget build(BuildContext context) {
-    print(window.physicalSize.width);
+
+    print(window.physicalSize.width );
     print('sdadadasdadasda');
     window.physicalSize.width;
     return new MaterialApp(
@@ -19,29 +23,34 @@ class MyApp extends StatelessWidget {
         appBar: new AppBar(
           title: new Text('Welcome to Flutter'),
         ),
-        body: Container(
+        body:
+
+
+
+
+
+
+
+
+        Container(
           child: ConstrainedBox(
             constraints: BoxConstraints.expand(),
             child: Stack(
-              alignment: Alignment.center,
+              alignment:Alignment.center ,
 //            fit: StackFit.expand,
 //          StackFit.expand, //未定位widget占满Stack整个空间
               children: <Widget>[
-                Stack(children: [
-                  Container(
-                    height: 40,
-                    width: 40,
-                    color: Colors.green,
-                  ),
-                  Container(
-                    height: 100,
-                    width: 200,
-                    color: Colors.red,
-                  ),
-                ],
+                Positioned(
+                  left: 18.0,
+                  child: Text("I am Jack"),
                 ),
-
-//                 Container(height: 40,width: 40,color: Colors.green,)
+                Container(child: Text("Hello world",style: TextStyle(color: Colors.white)),
+                  color: Colors.red,
+                ),
+                Positioned(
+                  top: 18.0,
+                  child: Text("Your friend"),
+                )
               ],
             ),
           ),

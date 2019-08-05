@@ -1,5 +1,5 @@
 
-
+import 'package:flutter/material.dart';
 
 enableFlags({bool bold, bool hidden}){//{}不就相当于可选吗 ,为啥网站上说[]是可选参数
 
@@ -115,3 +115,83 @@ class CacheZiLei2 extends Cache<String>{
 //  fx.f1('111');
 //}
 
+
+
+//abstract class A{
+//  VoidCallback get f1;
+//
+//
+//
+//  void a_log(){
+//    f1();
+//  }
+//
+//}
+//
+//class A2 extends A{
+//
+//
+//  void fun1(){
+//    print('A2 FUN1');
+//  }
+//
+//
+//  @override
+//  // TODO: implement f1
+//  VoidCallback get f1 {
+//    return fun1;
+//  }
+//
+//}
+//
+//
+//void main(){
+//
+//
+//
+//  A2()
+//      ..a_log();
+//}
+
+
+
+abstract class A{
+  VoidCallback  f1;
+  int  age;
+
+
+
+
+  void a_log(){
+    f1();
+  }
+
+  A(this.f1,this.age);
+
+
+}
+
+class A2 extends A{
+
+
+  void fun1(){
+    print('A2 FUN1');
+  }
+
+  A2(f1,age):super(f1,age);//子类赋值给父类的属性
+
+
+
+}
+
+
+void main(){
+
+  void fun1(){
+    print('main FUN1');
+  }
+
+  A2(fun1,5)
+    ..a_log();
+  print('end');
+}

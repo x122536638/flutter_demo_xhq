@@ -190,7 +190,7 @@ class NewRoute extends StatelessWidget {
           ),
           body: Center(
             child: Text(
-                "This is new ute ${countModel.count}   ${countModel.text}"),
+                "This is new ute ${model.count}   ${countModel.text}"),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
